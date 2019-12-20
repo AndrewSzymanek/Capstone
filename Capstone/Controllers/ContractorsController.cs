@@ -90,5 +90,9 @@ namespace Capstone.Controllers
                 return View();
             }
         }
+        public void SendInvoice()
+        {
+
+        }
     }
 }
