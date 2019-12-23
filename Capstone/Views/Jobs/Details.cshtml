@@ -1,0 +1,115 @@
+﻿@model Capstone.Models.Job
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaterialsCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaterialsCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LaborCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LaborCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalLiabilities)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalLiabilities)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentReceived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentReceived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaysToComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaysToComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsComplete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfitabilityRatio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfitabilityRatio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Add Materials Cost", "AddMaterialsCost", "Jobs", new { id = Model.JobId }, null)
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JobId })
+    @Html.ActionLink("Back to List", "Index")
+</p>
