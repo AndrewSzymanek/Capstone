@@ -1,7 +1,10 @@
 ﻿using Capstone.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,9 +20,10 @@ namespace Capstone.Controllers
         }
 
         // GET: Jobs/Details/5
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View();
+            Job jobToView = db.Jobs.Where(j => j.JobId == id).FirstOrDefault();
+            return View(jobToView);
         }
 
         // GET: Jobs/Create
@@ -45,14 +49,14 @@ namespace Capstone.Controllers
         }
 
         // GET: Jobs/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             return View();
         }
 
         // POST: Jobs/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Job job)
         {
             try
             {
@@ -88,9 +92,9 @@ namespace Capstone.Controllers
                 return View();
             }
         }
-        public ActionResult AddMaterialsCost()
+        public ActionResult AddMaterialsCost(int id)
         {
-            //Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+            Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
             return View();
         }
         [HttpPost]
@@ -100,6 +104,33 @@ namespace Capstone.Controllers
             jobToAddMaterialsCost.MaterialsCost += MaterialsCost;
             db.SaveChanges();
             return View("Index");
+        }
+
+        public async Task<string> GetWeatherCondition(Job job)
+        {
+            string zipCodeSpecific = (job.ZipCode + ",us");
+            var key = URLVariables.WeatherKey;
+            string url = $"https://api.openweathermap.org/data/2.5/weather?zip={zipCodeSpecific}&APPID={key}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonresult = await response.Content.ReadAsStringAsync();
+                WeatherViewModel weatherJsonInfo = JsonConvert.DeserializeObject<WeatherViewModel>(jsonresult);
+                string currentWeather = weatherJsonInfo.weather[0].description;    
+            return currentWeather;
+        }
+        public async Task<int> GetTemperature(Job job)
+        {
+            string zipCodeSpecific = (job.ZipCode + ",us");
+            var key = URLVariables.WeatherKey;
+            string url = $"https://api.openweathermap.org/data/2.5/weather?zip={zipCodeSpecific}&APPID={key}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonresult = await response.Content.ReadAsStringAsync();
+            WeatherViewModel weatherJsonInfo = JsonConvert.DeserializeObject<WeatherViewModel>(jsonresult);
+            var temperature = weatherJsonInfo.main.temp;
+            double temperatureWithDecimal = (1.8 * (temperature - 273)) + 32;
+            int temperatureInFahrenheit = Convert.ToInt32(temperatureWithDecimal);
+            return temperatureInFahrenheit;
         }
     }
 }

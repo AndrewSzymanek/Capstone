@@ -10,7 +10,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.JobName)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.StreetAddress)
             </th>
             <th>
@@ -42,53 +42,53 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProfitabilityRatio)
-            </th>*@
+            </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobName)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.StreetAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ZipCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaterialsCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LaborCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalLiabilities)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PaymentReceived)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DaysToComplete)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsComplete)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProfitabilityRatio)
-                </td>*@
-                <td>
-                    @Html.ActionLink("Expand", "Details", "Jobs")
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaterialsCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaborCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalLiabilities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentReceived)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DaysToComplete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsComplete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfitabilityRatio)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }, null)
+        </td>
+    </tr>
         }
 
     </table>

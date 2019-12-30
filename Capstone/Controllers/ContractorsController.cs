@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,9 +19,11 @@ namespace Capstone.Controllers
         }
 
         // GET: Contractors/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+            string contractorId = User.Identity.GetUserId();
+            Contractor contractorToDetails = db.Contractors.Where(c => c.ApplicationId == contractorId).SingleOrDefault();
+            return View(contractorToDetails);
         }
 
         // GET: Contractors/Create
@@ -39,7 +42,7 @@ namespace Capstone.Controllers
                 contractor.ApplicationId = userLoggedIn;
                 db.Contractors.Add(contractor);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Contractors", contractor);
             }
             catch
             {
@@ -48,36 +51,35 @@ namespace Capstone.Controllers
         }
 
         // GET: Contractors/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            string contractorLoggedIn = User.Identity.GetUserId();
+            Contractor contractorToEdit = db.Contractors.Where(c => c.ApplicationId == contractorLoggedIn).SingleOrDefault();
+            return View(contractorToEdit);
         }
 
         // POST: Contractors/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Contractor contractor)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                db.Entry(contractor).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", "Contractors", contractor);
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Contractors/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
 
         // POST: Contractors/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Contractor contractor)
         {
             try
             {

@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,13 +15,16 @@ namespace Capstone.Controllers
         // GET: Employees
         public ActionResult Index()
         {
+
             return View();
         }
 
         // GET: Employees/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+            string employeeId = User.Identity.GetUserId();
+            Employee employeeToGetDetails = db.Employees.Where(e => e.ApplicationId == employeeId).SingleOrDefault();
+            return View(employeeToGetDetails);
         }
 
         // GET: Employees/Create
@@ -39,7 +43,7 @@ namespace Capstone.Controllers
                 employee.ApplicationId = userLoggedIn;
                 db.Employees.Add(employee);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             catch
             {
@@ -48,25 +52,24 @@ namespace Capstone.Controllers
         }
 
         // GET: Employees/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            string employeeLoggedIn = User.Identity.GetUserId();
+            Employee employeeToEdit = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+            return View(employeeToEdit);
         }
 
         // POST: Employees/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        public ActionResult Edit(Employee employee)
+        {      
+                if (ModelState.IsValid)
+                {
+                    db.Entry(employee).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "Employees", employee);
+                }
+            return View();
         }
 
         // GET: Employees/Delete/5
