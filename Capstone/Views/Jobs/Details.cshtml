@@ -107,6 +107,9 @@
         </dd>
 
     </dl>
+    <h4>Current weather</h4>
+    <p>The current temperature is: @Model.Weather.Temperature degrees Fahrenheit.</p>
+    <p>The current weather condition is: @Model.Weather.Condition</p>  
 </div>
 <p>
     @*@Html.ActionLink("Add Materials Cost", "AddMaterialsCost", "Jobs", new { id = Model.JobId }, null)*@

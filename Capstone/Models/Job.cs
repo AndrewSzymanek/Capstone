@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -49,5 +50,13 @@ namespace Capstone.Models
         [DisplayName("Profitability Ratio")]
         public double? ProfitabilityRatio { get; set; }
 
+        [NotMapped]
+        public Weather Weather { get; set; }
+    }
+
+    public class Weather
+    {
+        public int Temperature { get; set; }
+        public string Condition { get; set; }
     }
 }

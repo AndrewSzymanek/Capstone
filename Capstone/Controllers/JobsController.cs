@@ -21,9 +21,14 @@ namespace Capstone.Controllers
         }
 
         // GET: Jobs/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
+            
             Job jobToView = db.Jobs.Where(j => j.JobId == id).FirstOrDefault();
+            jobToView.Weather = new Models.Weather();
+            jobToView.Weather.Condition = await GetWeatherCondition(jobToView);
+            jobToView.Weather.Temperature = await GetTemperature(jobToView);
+            
             return View(jobToView);
         }
 
@@ -114,7 +119,7 @@ namespace Capstone.Controllers
             HttpResponseMessage response = await client.GetAsync(url);
             string jsonresult = await response.Content.ReadAsStringAsync();
                 WeatherViewModel weatherJsonInfo = JsonConvert.DeserializeObject<WeatherViewModel>(jsonresult);
-                string currentWeather = weatherJsonInfo.weather[0].description;    
+                string currentWeather = weatherJsonInfo.weather[0].description;
             return currentWeather;
         }
         public async Task<int> GetTemperature(Job job)
