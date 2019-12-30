@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -49,25 +50,23 @@ namespace Capstone.Controllers
         }
 
         // GET: Jobs/Edit/5
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            return View();
+            Job jobToEdit = db.Jobs.Where(j => j.JobId == id).FirstOrDefault();
+            return View(jobToEdit);
         }
 
         // POST: Jobs/Edit/5
         [HttpPost]
         public ActionResult Edit(Job job)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                db.Entry(job).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Jobs");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Jobs/Delete/5

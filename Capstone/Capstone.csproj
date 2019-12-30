@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201912231616369_nullablejobproperties.Designer.cs">
       <DependentUpon>201912231616369_nullablejobproperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912302132170_addedDisplayNames.cs" />
+    <Compile Include="Migrations\201912302132170_addedDisplayNames.Designer.cs">
+      <DependentUpon>201912302132170_addedDisplayNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -333,6 +337,7 @@
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Contractors\Details.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -358,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912231616369_nullablejobproperties.resx">
       <DependentUpon>201912231616369_nullablejobproperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912302132170_addedDisplayNames.resx">
+      <DependentUpon>201912302132170_addedDisplayNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
