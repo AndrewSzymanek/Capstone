@@ -27,6 +27,9 @@ namespace Capstone.Models
 
         [DisplayName("Zip Code")]
         public string ZipCode { get; set; }
+
+        public string Lat { get; set; }
+        public string Long { get; set; }
         private double? materialsCost { get; set; }
 
         [DisplayName("Total Materials Cost")]
@@ -44,7 +47,7 @@ namespace Capstone.Models
         [DisplayName("Days To Complete")]
         public int? DaysToComplete { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("Complete?")]
         public bool? IsComplete { get; set; }
 
         [DisplayName("Profitability Ratio")]

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -40,17 +41,36 @@ namespace Capstone.Controllers
 
         // POST: Jobs/Create
         [HttpPost]
-        public ActionResult Create(Job job)
+        public async Task<ActionResult> Create(Job job)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                await GetLatLong(job);
+                db.Jobs.Add(job);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
+            }
+        }
+        public async System.Threading.Tasks.Task GetLatLong(Job job)
+        {
+            string address = (job.StreetAddress + job.City + job.State);
+            var key = URLVariables.GeoKey;
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={key}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonresult = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                LatLongJsonInfo latLongJsonInfo = JsonConvert.DeserializeObject<LatLongJsonInfo>(jsonresult);
+                var latlong = latLongJsonInfo.results[0].geometry.location;
+                string lat = latlong.lat.ToString();
+                string lng = latlong.lng.ToString();
+                job.Lat = lat;
+                job.Long = lng;
             }
         }
 

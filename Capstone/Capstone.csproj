@@ -228,9 +228,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="GeolocationJsonInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LatLongJsonInfo.cs" />
     <Compile Include="Migrations\201912191950520_InitialMigration.cs" />
     <Compile Include="Migrations\201912191950520_InitialMigration.Designer.cs">
       <DependentUpon>201912191950520_InitialMigration.cs</DependentUpon>
@@ -242,6 +245,14 @@
     <Compile Include="Migrations\201912302132170_addedDisplayNames.cs" />
     <Compile Include="Migrations\201912302132170_addedDisplayNames.Designer.cs">
       <DependentUpon>201912302132170_addedDisplayNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912311557260_addedlatlongtojob.cs" />
+    <Compile Include="Migrations\201912311557260_addedlatlongtojob.Designer.cs">
+      <DependentUpon>201912311557260_addedlatlongtojob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912311903495_changedIsCompletedisplayname.cs" />
+    <Compile Include="Migrations\201912311903495_changedIsCompletedisplayname.Designer.cs">
+      <DependentUpon>201912311903495_changedIsCompletedisplayname.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -328,7 +339,7 @@
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Cart\Create.cshtml" />
     <Content Include="Views\Cart\OrderStatus.cshtml" />
-    <Content Include="Views\Email\Index.cshtml" />
+    <Content Include="Views\Email\EmailIndex.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Jobs\Create.cshtml" />
@@ -343,6 +354,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Clients\" />
     <Folder Include="Views\Days\" />
+    <Folder Include="Views\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -366,6 +378,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912302132170_addedDisplayNames.resx">
       <DependentUpon>201912302132170_addedDisplayNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912311557260_addedlatlongtojob.resx">
+      <DependentUpon>201912311557260_addedlatlongtojob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912311903495_changedIsCompletedisplayname.resx">
+      <DependentUpon>201912311903495_changedIsCompletedisplayname.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

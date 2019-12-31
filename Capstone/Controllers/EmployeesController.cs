@@ -1,9 +1,12 @@
 ﻿using Capstone.Models;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,6 +15,7 @@ namespace Capstone.Controllers
     public class EmployeesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Employees
         public ActionResult Index()
         {
@@ -80,7 +84,7 @@ namespace Capstone.Controllers
 
         // POST: Employees/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Employee employee)
         {
             try
             {
@@ -92,6 +96,47 @@ namespace Capstone.Controllers
             {
                 return View();
             }
+        }
+
+        public async Task<string> GetLat(Employee employee)
+        {
+            var key = URLVariables.GeolocationKey;
+            string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonresult = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                Geolocation latInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
+                employee.Geolocation.Lat = latInfo.lat.ToString();
+                return employee.Geolocation.Lat;
+            }
+            string error = "Try again";
+            return error;
+        }
+        public async Task<string> GetLong(Employee employee)
+        {
+            var key = URLVariables.GeolocationKey;
+            string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            string jsonresult = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                Geolocation lngInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
+                employee.Geolocation.Lng = lngInfo.lng.ToString();
+                return employee.Geolocation.Lng;
+            }
+            string error = "Try again";
+            return error;
+        }
+       
+        public async System.Threading.Tasks.Task CompareToJobLocation()
+        {
+            string employeeLoggedIn = User.Identity.GetUserId();
+            Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+            await GetLat(employeeToCheckIn);
+            await GetLong(employeeToCheckIn);
         }
     }
 }

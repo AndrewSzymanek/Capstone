@@ -40,5 +40,15 @@ namespace Capstone.Models
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
+        [NotMapped]
+        public Geolocation Geolocation { get; set; }
+
+    }
+    
+    public class Geolocation
+    {
+        public string Lat { get; set; }
+        public string Lng { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Capstone.Models
     {
         [Required, Display(Name = "Your name")]
         public string ToName { get; set; }
+
         [Required, Display(Name = "Your email"), EmailAddress]
         public string ToEmail { get; set; }
         [Required]
