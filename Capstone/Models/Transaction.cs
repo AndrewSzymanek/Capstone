@@ -24,9 +24,5 @@ namespace Capstone.Models
         public int JobId { get; set; }
         public Job Job { get; set; }
 
-        [ForeignKey("Invoice")]
-        public int InvoiceId { get; set; }
-        public Invoice Invoice { get; set; }
-
     }
 }

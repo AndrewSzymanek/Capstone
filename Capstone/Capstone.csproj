@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201912311903495_changedIsCompletedisplayname.Designer.cs">
       <DependentUpon>201912311903495_changedIsCompletedisplayname.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001011529276_deletedExtraProperties.cs" />
+    <Compile Include="Migrations\202001011529276_deletedExtraProperties.Designer.cs">
+      <DependentUpon>202001011529276_deletedExtraProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -349,10 +353,10 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Contractors\Details.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Clients\" />
     <Folder Include="Views\Days\" />
     <Folder Include="Views\Transaction\" />
   </ItemGroup>
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912311903495_changedIsCompletedisplayname.resx">
       <DependentUpon>201912311903495_changedIsCompletedisplayname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001011529276_deletedExtraProperties.resx">
+      <DependentUpon>202001011529276_deletedExtraProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

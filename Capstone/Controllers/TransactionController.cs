@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capstone.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,12 +29,12 @@ namespace Capstone.Controllers
 
         // POST: Transaction/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Transaction transaction)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                //string contractorId = User.Identity.GetUserId();
+                //Contractor contractor = db.Contractors.Where(c => c.ApplicationId == contractorId).FirstOrDefault();
                 return RedirectToAction("Index");
             }
             catch

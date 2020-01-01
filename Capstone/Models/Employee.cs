@@ -19,18 +19,6 @@ namespace Capstone.Models
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
-        [DisplayName("Address")]
-        public string StreetAddress { get; set; }
-
-        [DisplayName("City")]
-        public string City { get; set; }
-
-        [DisplayName("State")]
-        public string State { get; set; }
-
-        [DisplayName("Zip code")]
-        public string ZipCode { get; set; }
-
         [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
 

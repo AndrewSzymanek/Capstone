@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,14 @@ namespace Capstone.Controllers
         }
 
         // GET: Jobs/Create
-        public ActionResult Create()
+        public ActionResult Create(Client client)
         {
             return View();
         }
 
         // POST: Jobs/Create
         [HttpPost]
-        public async Task<ActionResult> Create(Job job)
+        public async Task<ActionResult> Create(Job job, Client client)
         {
             try
             {

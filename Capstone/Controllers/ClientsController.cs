@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capstone.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,9 @@ namespace Capstone.Controllers
 {
     public class ClientsController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         // GET: Clients
+        
         public ActionResult Index()
         {
             return View();
@@ -23,18 +26,20 @@ namespace Capstone.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
         // POST: Clients/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Client client)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                db.Clients.Add(client);
+                db.SaveChanges();
+                return RedirectToAction("Create", "Jobs", client);
             }
             catch
             {

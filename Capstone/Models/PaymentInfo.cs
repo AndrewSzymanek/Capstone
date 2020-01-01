@@ -11,10 +11,7 @@ namespace Capstone.Models
     {
         [Key]
         public int PaymentInfoId { get; set; }
-        public string NameOnCard { get; set; }
-        public string CreditCardNumber { get; set; }
-        public string CreditCardExpirationDate { get; set; }
-        public int CreditCardSecurityCode { get; set; }
+        public string StripeToken { get; set; }
 
         [ForeignKey("Client")]
         public int ClientId { get; set; }
