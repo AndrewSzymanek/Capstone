@@ -1,4 +1,4 @@
-﻿@model Capstone.Models.EmailModel
+﻿@model Capstone.Models.Email
 
 @{
     ViewBag.Title = "Email";
@@ -13,17 +13,10 @@
     <hr />
 
     <div class="form-group">
-        @Html.LabelFor(m => m.ToName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.To, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.ToName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ToName)
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ToEmail, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.ToEmail, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ToEmail)
+            @Html.TextBoxFor(m => m.To, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.To)
         </div>
     </div>
     <div class="form-group">

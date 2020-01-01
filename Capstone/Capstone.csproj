@@ -266,13 +266,21 @@
     <Compile Include="Migrations\202001011704512_deletedAddressPropContractor.Designer.cs">
       <DependentUpon>202001011704512_deletedAddressPropContractor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001012113142_emploee.cs" />
+    <Compile Include="Migrations\202001012113142_emploee.Designer.cs">
+      <DependentUpon>202001012113142_emploee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001012130192_changedEmailModelName.cs" />
+    <Compile Include="Migrations\202001012130192_changedEmailModelName.Designer.cs">
+      <DependentUpon>202001012130192_changedEmailModelName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\Day.cs" />
-    <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Employee_Task.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -351,7 +359,7 @@
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Cart\Create.cshtml" />
     <Content Include="Views\Cart\OrderStatus.cshtml" />
-    <Content Include="Views\Email\EmailIndex.cshtml" />
+    <Content Include="Views\Email\Send.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Jobs\Create.cshtml" />
@@ -405,6 +413,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001011704512_deletedAddressPropContractor.resx">
       <DependentUpon>202001011704512_deletedAddressPropContractor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001012113142_emploee.resx">
+      <DependentUpon>202001012113142_emploee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001012130192_changedEmailModelName.resx">
+      <DependentUpon>202001012130192_changedEmailModelName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
