@@ -258,6 +258,14 @@
     <Compile Include="Migrations\202001011529276_deletedExtraProperties.Designer.cs">
       <DependentUpon>202001011529276_deletedExtraProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001011544511_deletedDaysPayAndHourly.cs" />
+    <Compile Include="Migrations\202001011544511_deletedDaysPayAndHourly.Designer.cs">
+      <DependentUpon>202001011544511_deletedDaysPayAndHourly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001011704512_deletedAddressPropContractor.cs" />
+    <Compile Include="Migrations\202001011704512_deletedAddressPropContractor.Designer.cs">
+      <DependentUpon>202001011704512_deletedAddressPropContractor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -391,6 +399,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001011529276_deletedExtraProperties.resx">
       <DependentUpon>202001011529276_deletedExtraProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001011544511_deletedDaysPayAndHourly.resx">
+      <DependentUpon>202001011544511_deletedDaysPayAndHourly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001011704512_deletedAddressPropContractor.resx">
+      <DependentUpon>202001011704512_deletedAddressPropContractor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

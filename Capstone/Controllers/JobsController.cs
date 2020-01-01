@@ -19,6 +19,7 @@ namespace Capstone.Controllers
         // GET: Jobs
         public ActionResult Index()
         {
+            //find out which contractor is logged in and only display their jobs in a list
             return View(db.Jobs.ToList());
         }
 
@@ -46,8 +47,16 @@ namespace Capstone.Controllers
         {
             try
             {
+                Transaction transactionToAdd = new Transaction();
+                string contractorId = User.Identity.GetUserId();
+                Contractor contractorForTransaction = db.Contractors.Where(c => c.ApplicationId == contractorId).FirstOrDefault();
+                int contractorIdForTransaction = contractorForTransaction.ContractorId;             
+                transactionToAdd.ContractorId = contractorIdForTransaction;
+                transactionToAdd.ClientId = client.ClientId;
                 await GetLatLong(job);
                 db.Jobs.Add(job);
+                transactionToAdd.JobId = job.JobId;
+                db.Transactions.Add(transactionToAdd);           
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

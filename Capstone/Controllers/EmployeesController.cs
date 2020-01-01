@@ -131,12 +131,17 @@ namespace Capstone.Controllers
             return error;
         }
        
-        public async System.Threading.Tasks.Task CompareToJobLocation()
+        public async System.Threading.Tasks.Task CompareToJobLocation(Job job)
         {
             string employeeLoggedIn = User.Identity.GetUserId();
             Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
             await GetLat(employeeToCheckIn);
             await GetLong(employeeToCheckIn);
+            if(employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
+            {
+                //check in for the day
+                //change checkin bool to true
+            }
         }
     }
 }

@@ -22,8 +22,9 @@ namespace Capstone.Models
         [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
 
-        [DisplayName("Hourly rate")]
-        public double HourlyRate { get; set; }
+        [ForeignKey("Contractor")]
+        public string BusinessName { get; set; }
+        public Contractor Contractor { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

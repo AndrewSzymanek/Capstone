@@ -17,8 +17,6 @@ namespace Capstone.Models
 
         public double HoursWorked { get; set; }
 
-        public double DaysPay { get; set; }
-
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
