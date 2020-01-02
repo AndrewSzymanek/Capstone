@@ -19,8 +19,56 @@ namespace Capstone.Controllers
         // GET: Jobs
         public ActionResult Index()
         {
-            //find out which contractor is logged in and only display their jobs in a list
-            return View(db.Jobs.ToList());
+            string contractorUserId = User.Identity.GetUserId();
+            Contractor contractorLoggedIn = db.Contractors.Where(c => c.ApplicationId == contractorUserId).SingleOrDefault();
+            List<Transaction> transactionsToJobs = new List<Transaction>();
+            foreach(Transaction transaction in db.Transactions)
+            {
+                if (transaction.ContractorId == contractorLoggedIn.ContractorId)
+                {
+                    transactionsToJobs.Add(transaction);
+                }             
+            }
+            List<int> jobIds = new List<int>();
+            foreach(Transaction transaction in transactionsToJobs)
+            {
+                jobIds.Add(transaction.JobId);
+            }
+            List<Job> contractorsJobs = new List<Job>();
+            foreach(int jobId in jobIds)
+            {
+                Job contractorJob = db.Jobs.Where(j => j.JobId == jobId).FirstOrDefault();
+                contractorsJobs.Add(contractorJob);
+            }
+            return View(contractorsJobs);
+        }
+        public ActionResult IndexCompletedJobs()
+        {
+            string contractorUserId = User.Identity.GetUserId();
+            Contractor contractorLoggedIn = db.Contractors.Where(c => c.ApplicationId == contractorUserId).SingleOrDefault();
+            List<Transaction> transactionsToJobs = new List<Transaction>();
+            foreach (Transaction transaction in db.Transactions)
+            {
+                if (transaction.ContractorId == contractorLoggedIn.ContractorId)
+                {
+                    transactionsToJobs.Add(transaction);
+                }
+            }
+            List<int> jobIds = new List<int>();
+            foreach (Transaction transaction in transactionsToJobs)
+            {
+                jobIds.Add(transaction.JobId);
+            }
+            List<Job> contractorsJobs = new List<Job>();
+            foreach (int jobId in jobIds)
+            {
+                Job contractorJob = db.Jobs.Where(j => j.JobId == jobId).FirstOrDefault();
+                if(contractorJob.IsComplete == true)
+                {
+                    contractorsJobs.Add(contractorJob);
+                }          
+            }
+            return View(contractorsJobs);
         }
 
         // GET: Jobs/Details/5
@@ -34,6 +82,7 @@ namespace Capstone.Controllers
             
             return View(jobToView);
         }
+   
 
         // GET: Jobs/Create
         public ActionResult Create(Client client)

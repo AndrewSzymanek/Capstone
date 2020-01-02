@@ -17,10 +17,18 @@ namespace Capstone.Controllers
             return View();
         }
 
-        // GET: Clients/Details/5
-        public ActionResult Details(int id)
+        public ActionResult GetClientInfo(int id)
         {
-            return View();
+            Transaction transactionToJob = new Transaction();
+            transactionToJob = db.Transactions.Where(j => j.JobId == id).SingleOrDefault();
+            Client clientWeWant = db.Clients.Where(c => c.ClientId == transactionToJob.ClientId).SingleOrDefault();
+            return RedirectToAction("Details", clientWeWant);
+        }
+        // GET: Clients/Details/5
+        public ActionResult Details(Client client)
+        {
+            //Client thisClient = db.Clients.Where(c => c.ClientId == client.ClientId).SingleOrDefault();
+            return View(client);
         }
 
         // GET: Clients/Create

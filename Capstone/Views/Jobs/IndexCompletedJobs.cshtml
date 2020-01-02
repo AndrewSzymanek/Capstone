@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Capstone.Models.Job>
+@{
+    ViewBag.Title = "IndexCompletedJobs";
+}
+
+<h2>List of Your Completed Jobs</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobName)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index") 
+</p>
+

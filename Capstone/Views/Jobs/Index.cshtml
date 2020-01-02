@@ -3,46 +3,14 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index of jobs</h2>
+<h2>List of Jobs</h2>
 <div>
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.JobName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ZipCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialsCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LaborCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalLiabilities)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentReceived)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DaysToComplete)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsComplete)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProfitabilityRatio)
-            </th>
+
             <th></th>
         </tr>
 
@@ -52,39 +20,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.JobName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaterialsCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LaborCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalLiabilities)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentReceived)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DaysToComplete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsComplete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfitabilityRatio)
-        </td>
+
         <td>
             @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }, null)
         </td>
@@ -95,5 +31,6 @@
 
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("View Completed Only", "IndexCompletedJobs", "Jobs")
 </p>
