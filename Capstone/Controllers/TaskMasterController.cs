@@ -30,13 +30,13 @@ namespace Capstone.Controllers
 
         // POST: Tasks/Create
         [HttpPost]
-        public ActionResult Create(int id, Job job)
+        public ActionResult Create(int id, Job job, Task task)
         {
-            Task newTask = new Task();
-            newTask.JobId = id;
-            db.Tasks.Add(newTask);
+            
+            task.JobId = id;
+            db.Tasks.Add(task);
             db.SaveChanges();
-            return View("Details", "Jobs", job);
+            return RedirectToAction("Index", "Jobs");
             
         }
 
