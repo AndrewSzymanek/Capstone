@@ -76,27 +76,27 @@ namespace Capstone.Controllers
             return View();
         }
 
-        // GET: Employees/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: Employees/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Employees/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, Employee employee)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// POST: Employees/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, Employee employee)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         public async Task<string> GetLat(Employee employee)
         {

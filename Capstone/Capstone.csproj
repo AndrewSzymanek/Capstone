@@ -228,51 +228,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TaskMasterController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="GeolocationJsonInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LatLongJsonInfo.cs" />
-    <Compile Include="Migrations\201912191950520_InitialMigration.cs" />
-    <Compile Include="Migrations\201912191950520_InitialMigration.Designer.cs">
-      <DependentUpon>201912191950520_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912231616369_nullablejobproperties.cs" />
-    <Compile Include="Migrations\201912231616369_nullablejobproperties.Designer.cs">
-      <DependentUpon>201912231616369_nullablejobproperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912302132170_addedDisplayNames.cs" />
-    <Compile Include="Migrations\201912302132170_addedDisplayNames.Designer.cs">
-      <DependentUpon>201912302132170_addedDisplayNames.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912311557260_addedlatlongtojob.cs" />
-    <Compile Include="Migrations\201912311557260_addedlatlongtojob.Designer.cs">
-      <DependentUpon>201912311557260_addedlatlongtojob.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912311903495_changedIsCompletedisplayname.cs" />
-    <Compile Include="Migrations\201912311903495_changedIsCompletedisplayname.Designer.cs">
-      <DependentUpon>201912311903495_changedIsCompletedisplayname.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001011529276_deletedExtraProperties.cs" />
-    <Compile Include="Migrations\202001011529276_deletedExtraProperties.Designer.cs">
-      <DependentUpon>202001011529276_deletedExtraProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001011544511_deletedDaysPayAndHourly.cs" />
-    <Compile Include="Migrations\202001011544511_deletedDaysPayAndHourly.Designer.cs">
-      <DependentUpon>202001011544511_deletedDaysPayAndHourly.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001011704512_deletedAddressPropContractor.cs" />
-    <Compile Include="Migrations\202001011704512_deletedAddressPropContractor.Designer.cs">
-      <DependentUpon>202001011704512_deletedAddressPropContractor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001012113142_emploee.cs" />
-    <Compile Include="Migrations\202001012113142_emploee.Designer.cs">
-      <DependentUpon>202001012113142_emploee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001012130192_changedEmailModelName.cs" />
-    <Compile Include="Migrations\202001012130192_changedEmailModelName.Designer.cs">
-      <DependentUpon>202001012130192_changedEmailModelName.cs</DependentUpon>
+    <Compile Include="Migrations\202001021938039_NoEmpTask.cs" />
+    <Compile Include="Migrations\202001021938039_NoEmpTask.Designer.cs">
+      <DependentUpon>202001021938039_NoEmpTask.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -282,7 +247,6 @@
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Employee_Task.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Job.cs" />
@@ -372,6 +336,7 @@
     <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Jobs\IndexCompletedJobs.cshtml" />
+    <Content Include="Views\TaskMaster\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,35 +357,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912191950520_InitialMigration.resx">
-      <DependentUpon>201912191950520_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912231616369_nullablejobproperties.resx">
-      <DependentUpon>201912231616369_nullablejobproperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912302132170_addedDisplayNames.resx">
-      <DependentUpon>201912302132170_addedDisplayNames.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912311557260_addedlatlongtojob.resx">
-      <DependentUpon>201912311557260_addedlatlongtojob.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912311903495_changedIsCompletedisplayname.resx">
-      <DependentUpon>201912311903495_changedIsCompletedisplayname.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001011529276_deletedExtraProperties.resx">
-      <DependentUpon>202001011529276_deletedExtraProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001011544511_deletedDaysPayAndHourly.resx">
-      <DependentUpon>202001011544511_deletedDaysPayAndHourly.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001011704512_deletedAddressPropContractor.resx">
-      <DependentUpon>202001011704512_deletedAddressPropContractor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001012113142_emploee.resx">
-      <DependentUpon>202001012113142_emploee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001012130192_changedEmailModelName.resx">
-      <DependentUpon>202001012130192_changedEmailModelName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001021938039_NoEmpTask.resx">
+      <DependentUpon>202001021938039_NoEmpTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

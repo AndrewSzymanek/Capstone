@@ -24,7 +24,6 @@ namespace Capstone.Models
         public DbSet<Client> Clients { get; set; }
         public DbSet<Contractor> Contractors { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Employee_Task> Employee_Tasks { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<PaymentInfo> PaymentInfo { get; set; }

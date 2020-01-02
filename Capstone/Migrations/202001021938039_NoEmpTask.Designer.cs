@@ -7,13 +7,13 @@ namespace Capstone.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedlatlongtojob : IMigrationMetadata
+    public sealed partial class NoEmpTask : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedlatlongtojob));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NoEmpTask));
         
         string IMigrationMetadata.Id
         {
-            get { return "201912311557260_addedlatlongtojob"; }
+            get { return "202001021938039_NoEmpTask"; }
         }
         
         string IMigrationMetadata.Source
