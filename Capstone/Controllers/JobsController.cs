@@ -175,18 +175,36 @@ namespace Capstone.Controllers
                 return View();
             }
         }
-        public ActionResult AddMaterialsCost(int id)
+        //public ActionResult AddMaterialsCost(int id)
+        //{
+        //    Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult AddMaterialsCost(Job job, double MaterialsCost)
+        //{
+        //    Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == job.JobId).SingleOrDefault();
+        //    jobToAddMaterialsCost.MaterialsCost += MaterialsCost;
+        //    db.SaveChanges();
+        //    return View("Index");
+        //}
+
+        public ActionResult CalculateProfitabilityRatio(int id)
         {
-            Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AddMaterialsCost(Job job, double MaterialsCost)
-        {
-            Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == job.JobId).SingleOrDefault();
-            jobToAddMaterialsCost.MaterialsCost += MaterialsCost;
-            db.SaveChanges();
-            return View("Index");
+            //grab DateTime date when this is calculated?
+            Job jobToCalculateProfitRatio = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+            if(jobToCalculateProfitRatio.MaterialsCost != null && jobToCalculateProfitRatio.LaborCost != null && jobToCalculateProfitRatio.IsComplete != false)
+            {
+                jobToCalculateProfitRatio.TotalLiabilities = (jobToCalculateProfitRatio.MaterialsCost + jobToCalculateProfitRatio.LaborCost);
+                jobToCalculateProfitRatio.ProfitabilityRatio = (jobToCalculateProfitRatio.PaymentReceived / jobToCalculateProfitRatio.TotalLiabilities);
+                db.Entry(jobToCalculateProfitRatio).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }          
         }
 
         public async Task<string> GetWeatherCondition(Job job)
@@ -214,6 +232,11 @@ namespace Capstone.Controllers
             double temperatureWithDecimal = (1.8 * (temperature - 273)) + 32;
             int temperatureInFahrenheit = Convert.ToInt32(temperatureWithDecimal);
             return temperatureInFahrenheit;
+        }
+        public ActionResult SeeProfitChart()
+        {
+
+            return View();
         }
     }
 }
