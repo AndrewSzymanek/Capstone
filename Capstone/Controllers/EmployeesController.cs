@@ -147,16 +147,36 @@ namespace Capstone.Controllers
             return error;
         }
        
-        public async System.Threading.Tasks.Task CompareToJobLocation(Job job)
+        public async System.Threading.Tasks.Task CompareToJobLocation(Job job, Employee employee)
+        {         
+            await GetLat(employee);
+            await GetLong(employee);
+         
+        }
+        public async void CheckIn(Job job)
         {
             string employeeLoggedIn = User.Identity.GetUserId();
             Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
-            await GetLat(employeeToCheckIn);
-            await GetLong(employeeToCheckIn);
-            if(employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
+            await CompareToJobLocation(job, employeeToCheckIn);           
+            if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
             {
                 //check in for the day
-                //change checkin bool to true
+                Day today = new Day();
+                today.EmployeeId = employeeToCheckIn.EmployeeId;
+                today.TimeIn = DateTime.Now.ToString();
+                db.Days.Add(today);             
+            }
+        }
+        public async void CheckOut(Job job)
+        {
+            string employeeLoggedIn = User.Identity.GetUserId();
+            Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+            Day today;
+            await CompareToJobLocation(job, employeeToCheckIn);
+            if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
+            {
+                //check out for the day
+                today.TimeOut = DateTime.Now.ToString();
             }
         }
     }
