@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,9 +33,8 @@ namespace Capstone.Controllers
 
         // POST: Tasks/Create
         [HttpPost]
-        public ActionResult Create(int id, Job job, Task task)
+        public ActionResult Create(Task task, int id)
         {
-            
             task.JobId = id;
             db.Tasks.Add(task);
             db.SaveChanges();
@@ -45,23 +45,22 @@ namespace Capstone.Controllers
         // GET: Tasks/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Task taskToEdit = db.Tasks.Where(t => t.TaskId == id).SingleOrDefault();
+            return View(taskToEdit);
         }
 
         // POST: Tasks/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Task task)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+          
+                if (ModelState.IsValid)
+                {
+                    db.Entry(task).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("JobsIndex", "Employees");
+                }
+                return RedirectToAction("Index", "Home");          
         }
 
         // GET: Tasks/Delete/5

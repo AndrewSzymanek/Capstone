@@ -20,9 +20,9 @@ namespace Capstone.Controllers
                 return RedirectToAction("Index", "Employees");
             }
             else if(this.User.IsInRole("Contractor"))
-                {
-                    return RedirectToAction("Index", "Contractors");
-                }
+            {
+                return RedirectToAction("Index", "Contractors");
+            }
 
             return View();
         }

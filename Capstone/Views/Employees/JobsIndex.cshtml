@@ -4,32 +4,15 @@
     ViewBag.Title = "JobsIndex";
 }
 
-<h2>JobsIndex</h2>
+<h2>Jobs Index</h2>
 
 <p>
+    @Html.ActionLink("Back to profile", "Index", "Employees")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.JobName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StreetAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DaysToComplete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsComplete)
         </th>
  
         <th></th>
@@ -40,31 +23,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.JobName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DaysToComplete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsComplete)
-        </td>
   
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.JobId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.JobId }) |
+            @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }, null) |
             @Html.ActionLink("View task list", "Index", "TaskMaster", new { id = item.JobId }, null) |
         </td>
     </tr>
 }
+
+ 
 
 </table>

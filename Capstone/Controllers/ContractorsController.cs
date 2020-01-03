@@ -15,7 +15,9 @@ namespace Capstone.Controllers
         // GET: Contractors
         public ActionResult Index()
         {
-            return View();
+            string contractorId = User.Identity.GetUserId();
+            Contractor contractorToGet = db.Contractors.Where(c => c.ApplicationId == contractorId).SingleOrDefault();
+            return View(contractorToGet);
         }
 
         // GET: Contractors/Details/5

@@ -340,6 +340,7 @@
     <Content Include="Views\Transaction\ChooseClient.cshtml" />
     <Content Include="Views\TaskMaster\Index.cshtml" />
     <Content Include="Views\Employees\JobsIndex.cshtml" />
+    <Content Include="Views\TaskMaster\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

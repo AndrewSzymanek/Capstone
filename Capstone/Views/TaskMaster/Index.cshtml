@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.JobId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
+            @Html.ActionLink("Edit", "Edit", "TaskMaster", new { id=item.TaskId }, null) |
             @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
         </td>
     </tr>
