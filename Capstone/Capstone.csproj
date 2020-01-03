@@ -337,11 +337,12 @@
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Jobs\IndexCompletedJobs.cshtml" />
     <Content Include="Views\TaskMaster\Create.cshtml" />
+    <Content Include="Views\Transaction\ChooseClient.cshtml" />
+    <Content Include="Views\TaskMaster\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Days\" />
-    <Folder Include="Views\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,41 @@ namespace Capstone.Controllers
 {
     public class TransactionController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         // GET: Transaction
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult ChooseClient()
+        {
+            string contractorUserId = User.Identity.GetUserId();
+            Contractor contractorLoggedIn = db.Contractors.Where(c => c.ApplicationId == contractorUserId).SingleOrDefault();
+            List<Transaction> contractorTransactions = new List<Transaction>();
+            foreach(Transaction transaction in db.Transactions)
+            {
+                if(transaction.ContractorId == contractorLoggedIn.ContractorId)
+                {
+                    contractorTransactions.Add(transaction);
+                }
+            }                   
+            List<Client> clients = new List<Client>();
+            foreach(Transaction transaction in contractorTransactions)
+            {
+                int clientId = transaction.ClientId;
+                Client clientToAdd = db.Clients.Where(c => c.ClientId == clientId).Single();
+                clients.Add(clientToAdd);
+                
+               
+            }
+            return View(clients);
+        }
+        [HttpPost]
+        public ActionResult ChooseClient(string name)
+        {
+            Client clientWeWant = db.Clients.Where(c => c.LastName == name).FirstOrDefault();
+            return RedirectToAction("Create", "Jobs", clientWeWant);
         }
 
         // GET: Transaction/Details/5

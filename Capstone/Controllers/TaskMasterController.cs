@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,10 @@ namespace Capstone.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Tasks
-        public ActionResult Index()
-        {
-            return View();
+        public ActionResult Index(int id)
+        {        
+            var listoftask = db.Tasks.Where(s => s.JobId == id).ToList();
+            return View(listoftask);
         }
 
         // GET: Tasks/Details/5

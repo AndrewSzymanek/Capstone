@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@Html.HiddenFor(model => model.JobId)
 <h2>Details</h2>
 
 <div>
@@ -113,8 +113,9 @@
 </div>
 <p>
     @*@Html.ActionLink("Add Materials Cost", "AddMaterialsCost", "Jobs", new { id = Model.JobId }, null)*@
-    @Html.ActionLink("View Client Info", "GetClientInfo", "Clients", new { id = Model.JobId }, null) |
+    @Html.ActionLink("View task list", "Index", "TaskMaster", new { id = Model.JobId }, null) |
     @Html.ActionLink("Add a task", "Create", "TaskMaster", new { id = Model.JobId }, null) |
     @Html.ActionLink("Edit", "Edit", "Jobs", new { id = Model.JobId }, null) |
+    @Html.ActionLink("View Client Info", "GetClientInfo", "Clients", new { id = Model.JobId }, null) |
     @Html.ActionLink("Back to List", "Index")
 </p>
