@@ -19,8 +19,24 @@ namespace Capstone.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-
-            return View();
+            string employeeId = User.Identity.GetUserId();
+            Employee employeeToGet = db.Employees.Where(e => e.ApplicationId == employeeId).SingleOrDefault();
+            return View(employeeToGet);
+        }
+        public ActionResult JobsIndex()
+        {
+            string employeeId = User.Identity.GetUserId();
+            Employee employeeToGet = db.Employees.Where(e => e.ApplicationId == employeeId).SingleOrDefault();
+            Contractor boss = db.Contractors.Where(c => c.ContractorId == employeeToGet.ContractorId).SingleOrDefault();
+            List<Transaction> transactionList = db.Transactions.Where(t => t.ContractorId == boss.ContractorId).ToList();
+            List<Job> jobs = new List<Job>();
+            foreach(Transaction transaction in transactionList)
+            {
+                Job job = db.Jobs.Where(j => j.JobId == transaction.JobId).SingleOrDefault();
+                jobs.Add(job);
+            }
+           
+            return View(jobs);
         }
 
         // GET: Employees/Details/5
