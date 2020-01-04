@@ -1,4 +1,4 @@
-﻿@model Capstone.Models.Job
+﻿@model IEnumerable<Capstone.Models.Job>
 
 @{
     ViewBag.Title = "SeeProfitChart";
@@ -15,8 +15,8 @@
             var myChart = new Chart(width: 600, height: 400)
                .AddTitle("Profitability Ratios For Jobs")
                .AddSeries(chartType: "column",
-                  xValue: dbdata, xField: Model.JobName,
-                  yValues: dbdata, yFields: Model.ProfitabilityRatio.ToString())
+                  xValue: dbdata, xField: "JobName",
+                  yValues: dbdata, yFields: "ProfitabilityRatio")
                .Write();
         }
     </div>

@@ -235,8 +235,9 @@ namespace Capstone.Controllers
         }
         public ActionResult SeeProfitChart()
         {
-
-            return View();
+            List<Job> completeJobs = new List<Job>();
+            completeJobs = db.Jobs.Where(j => j.IsComplete == true && j.ProfitabilityRatio != null).ToList();
+            return View(completeJobs);
         }
     }
 }

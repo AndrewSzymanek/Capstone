@@ -239,6 +239,10 @@
     <Compile Include="Migrations\202001021938039_NoEmpTask.Designer.cs">
       <DependentUpon>202001021938039_NoEmpTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001041604499_addedpropstoday.cs" />
+    <Compile Include="Migrations\202001041604499_addedpropstoday.Designer.cs">
+      <DependentUpon>202001041604499_addedpropstoday.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -363,6 +367,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001021938039_NoEmpTask.resx">
       <DependentUpon>202001021938039_NoEmpTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001041604499_addedpropstoday.resx">
+      <DependentUpon>202001041604499_addedpropstoday.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

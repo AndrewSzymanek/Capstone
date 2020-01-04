@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,10 +13,16 @@ namespace Capstone.Models
         [Key]
         public int DayId { get; set; }
         
+        [DisplayName("Time In")]
         public string TimeIn { get; set; }
+
+        [DisplayName("Time Out")]
         public string TimeOut { get; set; }
 
-        public double HoursWorked { get; set; }
+        public string TodaysDate { get; set; }
+
+        [DisplayName("Time Worked")]
+        public double? MinutesWorked { get; set; }
 
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }

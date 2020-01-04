@@ -92,28 +92,28 @@ namespace Capstone.Controllers
             return View();
         }
 
-        //// GET: Employees/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+        // GET: Employees/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
 
-        //// POST: Employees/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, Employee employee)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
+        // POST: Employees/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, Employee employee)
+        {
+            try
+            {
+                // TODO: Add delete logic here
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpPost]
         public async Task<string> GetLat(Employee employee)
         {
             var key = URLVariables.GeolocationKey;
@@ -124,12 +124,15 @@ namespace Capstone.Controllers
             if (response.IsSuccessStatusCode)
             {
                 Geolocation latInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
-                employee.Geolocation.Lat = latInfo.lat.ToString();
+                int Latitude = Convert.ToInt32(latInfo.lat);
+                employee.Geolocation.Lat = Latitude.ToString();
                 return employee.Geolocation.Lat;
             }
             string error = "Try again";
             return error;
         }
+
+        [HttpPost]
         public async Task<string> GetLong(Employee employee)
         {
             var key = URLVariables.GeolocationKey;
@@ -140,7 +143,8 @@ namespace Capstone.Controllers
             if (response.IsSuccessStatusCode)
             {
                 Geolocation lngInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
-                employee.Geolocation.Lng = lngInfo.lng.ToString();
+                int Longitude = Convert.ToInt32(lngInfo.lng);
+                employee.Geolocation.Lng = Longitude.ToString();
                 return employee.Geolocation.Lng;
             }
             string error = "Try again";
@@ -153,30 +157,34 @@ namespace Capstone.Controllers
             await GetLong(employee);
          
         }
-        public async void CheckIn(Job job)
+        public async System.Threading.Tasks.Task CheckIn(int id)
         {
+            DateTime todaysDate = new DateTime(); 
             string employeeLoggedIn = User.Identity.GetUserId();
             Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+            Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
             await CompareToJobLocation(job, employeeToCheckIn);           
             if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
             {
-                //check in for the day
                 Day today = new Day();
                 today.EmployeeId = employeeToCheckIn.EmployeeId;
-                today.TimeIn = DateTime.Now.ToString();
+                today.TodaysDate = todaysDate.Date.ToString();
+                today.TimeIn = todaysDate.TimeOfDay.ToString();
+                today.TimeOut = "to be determined";
                 db.Days.Add(today);             
             }
         }
-        public async void CheckOut(Job job)
+        public async System.Threading.Tasks.Task CheckOut(int id)
         {
+            DateTime todaysDate = new DateTime();
             string employeeLoggedIn = User.Identity.GetUserId();
             Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
-            Day today;
+            Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+            Day today = db.Days.Where(d => d.TodaysDate == todaysDate.Date.ToString()).Single();
             await CompareToJobLocation(job, employeeToCheckIn);
             if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
             {
-                //check out for the day
-                today.TimeOut = DateTime.Now.ToString();
+                today.TimeOut = todaysDate.TimeOfDay.ToString();
             }
         }
     }
