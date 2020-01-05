@@ -252,6 +252,10 @@
     <Compile Include="Migrations\202001041604499_addedpropstoday.Designer.cs">
       <DependentUpon>202001041604499_addedpropstoday.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001051620217_addedCheckedInToDay.cs" />
+    <Compile Include="Migrations\202001051620217_addedCheckedInToDay.Designer.cs">
+      <DependentUpon>202001051620217_addedCheckedInToDay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -364,6 +368,8 @@
     <Content Include="Views\Employees\JobsIndex.cshtml" />
     <Content Include="Views\TaskMaster\Edit.cshtml" />
     <Content Include="Views\Jobs\SeeProfitChart.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
+    <Content Include="Views\Shared\_LayoutContractor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -388,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001041604499_addedpropstoday.resx">
       <DependentUpon>202001041604499_addedpropstoday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051620217_addedCheckedInToDay.resx">
+      <DependentUpon>202001051620217_addedCheckedInToDay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

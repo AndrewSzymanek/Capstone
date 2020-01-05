@@ -20,9 +20,9 @@ namespace Capstone.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            string employeeId = User.Identity.GetUserId();
-            Employee employeeToGet = db.Employees.Where(e => e.ApplicationId == employeeId).SingleOrDefault();
-            return View(employeeToGet);
+            //string employeeId = User.Identity.GetUserId();
+            //Employee employeeToGet = db.Employees.Where(e => e.ApplicationId == employeeId).SingleOrDefault();
+            return View(/*employeeToGet*/);
         }
         public ActionResult JobsIndex()
         {
@@ -51,7 +51,8 @@ namespace Capstone.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            return View();
+            Employee employee = new Employee();
+            return View(employee);
         }
 
         // POST: Employees/Create
@@ -105,8 +106,6 @@ namespace Capstone.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -114,79 +113,111 @@ namespace Capstone.Controllers
                 return View();
             }
         }
-        [HttpPost]
-        public async Task<string> GetLat(Employee employee)
-        {
-            var key = URLVariables.GeolocationKey;
-            string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url);
-            string jsonresult = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-            {
-                Geolocation latInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
-                int Latitude = Convert.ToInt32(latInfo.lat);
-                employee.Geolocation.Lat = Latitude.ToString();
-                return employee.Geolocation.Lat;
-            }
-            string error = "Try again";
-            return error;
-        }
+        //[HttpPost]
+        //public async Task<string> GetLat(Employee employee)
+        //{
+        //    var key = URLVariables.GeolocationKey;
+        //    string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
+        //    HttpClient client = new HttpClient();
+        //    HttpResponseMessage response = await client.GetAsync(url);
+        //    string jsonresult = await response.Content.ReadAsStringAsync();
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        Geolocation latInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
+        //        int Latitude = Convert.ToInt32(latInfo.lat);
+        //        employee.Geolocation.Lat = Latitude.ToString();
+        //        return employee.Geolocation.Lat;
+        //    }
+        //    string error = "Try again";
+        //    return error;
+        //}
 
-        [HttpPost]
-        public async Task<string> GetLong(Employee employee)
-        {
-            var key = URLVariables.GeolocationKey;
-            string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url);
-            string jsonresult = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-            {
-                Geolocation lngInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
-                int Longitude = Convert.ToInt32(lngInfo.lng);
-                employee.Geolocation.Lng = Longitude.ToString();
-                return employee.Geolocation.Lng;
-            }
-            string error = "Try again";
-            return error;
-        }
-       
-        public async System.Threading.Tasks.Task CompareToJobLocation(Job job, Employee employee)
-        {         
-            await GetLat(employee);
-            await GetLong(employee);
-         
-        }
-        public async System.Threading.Tasks.Task CheckIn(int id)
-        {
-            DateTime todaysDate = new DateTime(); 
-            string employeeLoggedIn = User.Identity.GetUserId();
-            Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
-            Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-            await CompareToJobLocation(job, employeeToCheckIn);           
-            if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
-            {
-                Day today = new Day();
-                today.EmployeeId = employeeToCheckIn.EmployeeId;
-                today.TodaysDate = todaysDate.Date.ToString();
-                today.TimeIn = todaysDate.TimeOfDay.ToString();
-                today.TimeOut = "to be determined";
-                db.Days.Add(today);             
-            }
-        }
-        public async System.Threading.Tasks.Task CheckOut(int id)
+        //[HttpPost]
+        //public async Task<string> GetLong(Employee employee)
+        //{
+        //    var key = URLVariables.GeolocationKey;
+        //    string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
+        //    HttpClient client = new HttpClient();
+        //    HttpResponseMessage response = await client.GetAsync(url);
+        //    string jsonresult = await response.Content.ReadAsStringAsync();
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        Geolocation lngInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
+        //        int Longitude = Convert.ToInt32(lngInfo.lng);
+        //        employee.Geolocation.Lng = Longitude.ToString();
+        //        return employee.Geolocation.Lng;
+        //    }
+        //    string error = "Try again";
+        //    return error;
+        //}
+
+        //public async System.Threading.Tasks.Task CompareToJobLocation(Job job, Employee employee)
+        //{         
+        //    await GetLat(employee);
+        //    await GetLong(employee);
+
+        //}
+        //public async System.Threading.Tasks.Task CheckIn(int id)
+        //{
+        //    DateTime todaysDate = new DateTime(); 
+        //    string employeeLoggedIn = User.Identity.GetUserId();
+        //    Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+        //    Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+        //    await CompareToJobLocation(job, employeeToCheckIn);           
+        //    if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
+        //    {
+        //        Day today = new Day();
+        //        today.EmployeeId = employeeToCheckIn.EmployeeId;
+        //        today.TodaysDate = todaysDate.Date.ToString();
+        //        today.TimeIn = todaysDate.TimeOfDay.ToString();
+        //        today.TimeOut = "to be determined";
+        //        db.Days.Add(today);             
+        //    }
+        //}
+        //public async System.Threading.Tasks.Task CheckOut(int id)
+        //{
+        //    DateTime todaysDate = new DateTime();
+        //    string employeeLoggedIn = User.Identity.GetUserId();
+        //    Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+        //    Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+        //    Day today = db.Days.Where(d => d.TodaysDate == todaysDate.Date.ToString()).Single();
+        //    await CompareToJobLocation(job, employeeToCheckIn);
+        //    if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
+        //    {
+        //        today.TimeOut = todaysDate.TimeOfDay.ToString();
+        //    }
+        //}
+        public async System.Threading.Tasks.Task<ActionResult> CheckIn(int id)
         {
             DateTime todaysDate = new DateTime();
             string employeeLoggedIn = User.Identity.GetUserId();
             Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
             Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-            Day today = db.Days.Where(d => d.TodaysDate == todaysDate.Date.ToString()).Single();
-            await CompareToJobLocation(job, employeeToCheckIn);
-            if (employeeToCheckIn.Geolocation.Lat == job.Lat && employeeToCheckIn.Geolocation.Lng == job.Long)
-            {
-                today.TimeOut = todaysDate.TimeOfDay.ToString();
-            }
+
+            Day today = new Day();
+            today.EmployeeId = employeeToCheckIn.EmployeeId;
+            today.TodaysDate = todaysDate.Date.ToString();
+            today.TimeIn = todaysDate.TimeOfDay.ToString();
+            today.CheckedIn = true;
+            today.TimeOut = "to be determined";
+            db.Days.Add(today);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public async System.Threading.Tasks.Task<ActionResult> CheckOut(int id)
+        {
+            DateTime todaysDate = new DateTime();
+            string employeeLoggedIn = User.Identity.GetUserId();
+            Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+            Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
+
+            Day today = new Day();
+            today.EmployeeId = employeeToCheckIn.EmployeeId;
+            today.CheckedIn = false;
+            today.TimeOut = todaysDate.TimeOfDay.ToString();
+            db.Days.Add(today);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

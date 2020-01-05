@@ -15,9 +15,9 @@ namespace Capstone.Controllers
         // GET: Contractors
         public ActionResult Index()
         {
-            string contractorId = User.Identity.GetUserId();
-            Contractor contractorToGet = db.Contractors.Where(c => c.ApplicationId == contractorId).SingleOrDefault();
-            return View(contractorToGet);
+            //string contractorId = User.Identity.GetUserId();
+            //Contractor contractorToGet = db.Contractors.Where(c => c.ApplicationId == contractorId).SingleOrDefault();
+            return View(/*contractorToGet*/);
         }
 
         // GET: Contractors/Details/5
@@ -31,7 +31,8 @@ namespace Capstone.Controllers
         // GET: Contractors/Create
         public ActionResult Create()
         {
-            return View();
+            Contractor contractor = new Contractor();
+            return View(contractor);
         }
 
         // POST: Contractors/Create

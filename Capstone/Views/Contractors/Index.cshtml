@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutContractor.cshtml";
 }
 
 <h2>Index</h2>
@@ -9,24 +10,6 @@
 <div>
     <h4>Contractor</h4>
     <hr />
-    @*<dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>*@
-
-    @*</dl>*@
 </div>
 
 <h6>Business Actions </h6>
@@ -39,7 +22,6 @@
 <h6>Profile Actions</h6>
 <ul>
     <li>@Html.ActionLink("Profile Info", "Details", "Contractors")</li>
-    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.ContractorId })</li>
 </ul>
 
 

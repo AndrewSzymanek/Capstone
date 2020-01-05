@@ -21,14 +21,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Client Payment Page", "Create", "Cart")</li>
+                    <li>@Html.ActionLink("Contractor Home", "Index", "Contractors")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-  
+
 
     <div class="container body-content">
         @RenderBody()

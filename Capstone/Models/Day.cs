@@ -19,6 +19,9 @@ namespace Capstone.Models
         [DisplayName("Time Out")]
         public string TimeOut { get; set; }
 
+        [DisplayName("Checked In")]
+        public bool CheckedIn { get; set; }
+
         public string TodaysDate { get; set; }
 
         [DisplayName("Time Worked")]

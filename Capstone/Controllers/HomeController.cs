@@ -15,16 +15,20 @@ namespace Capstone.Controllers
         public ActionResult Index()
         {
             //can check for user role and redirect to a different view based off of who's logged in
-            if (this.User.IsInRole("Employee"))
+            if (User.IsInRole("Employee"))
             {
                 return RedirectToAction("Index", "Employees");
             }
-            else if(this.User.IsInRole("Contractor"))
+            else if(User.IsInRole("Contractor"))
             {
                 return RedirectToAction("Index", "Contractors");
             }
+            else 
+            {
+                return View();
+            }
 
-            return View();
+ 
         }
 
         public ActionResult About()
