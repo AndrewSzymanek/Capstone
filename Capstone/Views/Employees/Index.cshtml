@@ -9,7 +9,7 @@
 <div>
     <h4>Employee</h4>
     <hr />
-    <dl class="dl-horizontal">
+    @*<dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -41,12 +41,11 @@
         <dd>
             @Html.DisplayFor(model => model.ContractorId)
         </dd>
-
-
-
-    </dl>
+    </dl>*@
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", "Employees") |
-    @Html.ActionLink("View Jobs", "JobsIndex", "Employees") 
-</p>
+<ul>
+    <li>@Html.ActionLink("Profile Info", "Details", "Employees") |</li>
+    <li>@Html.ActionLink("Edit", "Edit", "Employees") |</li>
+    <li>@Html.ActionLink("View Jobs", "JobsIndex", "Employees")</li>
+</ul>
+
