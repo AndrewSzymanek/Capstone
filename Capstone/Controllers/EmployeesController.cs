@@ -20,9 +20,7 @@ namespace Capstone.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            //string employeeId = User.Identity.GetUserId();
-            //Employee employeeToGet = db.Employees.Where(e => e.ApplicationId == employeeId).SingleOrDefault();
-            return View(/*employeeToGet*/);
+            return View();
         }
         public ActionResult JobsIndex()
         {

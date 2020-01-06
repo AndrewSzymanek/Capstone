@@ -222,28 +222,14 @@ namespace Capstone.Controllers
             List<Job> completeJobs = contractorsJobs.Where(j => j.IsComplete == true && j.ProfitabilityRatio != null).ToList();
             return completeJobs;
         }
-        public async Task<ActionResult> SeeProfits90Days()
-        {
-            DateTime now = DateTime.Now;
-            List<Job> jobs = await GetCompleteJobs();           
-            List<Job> jobsWithin90Days = jobs.Where(j => j.DateCompleted?.Day <= (now.Day - 90)).ToList();
-            return View(jobsWithin90Days);
-        }
 
-        public async Task<ActionResult> SeeProfits6Months()
+        public async Task<ActionResult> SeeProfitsByMonths(int months)
         {
             DateTime now = DateTime.Now;
             List<Job> jobs = await GetCompleteJobs();
-            List<Job> jobsWithin6Months = jobs.Where(j => j.DateCompleted?.Day <= (now.Day - 180)).ToList();
-            return View(jobsWithin6Months);
+            DateTime? withinThisDate = now.AddMonths(months*-1);
+            List<Job> jobsWithinSpecified = jobs.Where(j => j.DateCompleted > withinThisDate).ToList();
+            return View(jobsWithinSpecified);
         }
-        public async Task<ActionResult> SeeProfitsOneYear()
-        {
-            DateTime now = DateTime.Now;
-            List<Job> jobs = await GetCompleteJobs();
-            List<Job> jobsWithinOneYear = jobs.Where(j => j.DateCompleted?.Day <= (now.Day - 365)).ToList();
-            return View(jobsWithinOneYear);
-        }
-
     }
 }

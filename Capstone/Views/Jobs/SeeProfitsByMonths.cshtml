@@ -8,15 +8,13 @@
 
 <body>
     <div>
-        @using Capstone.Models;
         @{
-            ApplicationDbContext db = new ApplicationDbContext();
-            var dbdata = db.Jobs.Where(j => j.ProfitabilityRatio >= 1).ToList();
+            var data = Model.Where(j => j.ProfitabilityRatio >= 1).ToList();
             var myChart = new Chart(width: 600, height: 400)
                .AddTitle("Profitability Ratios For Jobs")
                .AddSeries(chartType: "column",
-                  xValue: dbdata, xField: "JobName",
-                  yValues: dbdata, yFields: "ProfitabilityRatio")
+                  xValue: data, xField: "JobName",
+                  yValues: data, yFields: "ProfitabilityRatio")
                .Write();
         }
     </div>

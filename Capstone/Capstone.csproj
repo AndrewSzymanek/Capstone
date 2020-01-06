@@ -375,11 +375,9 @@
     <Content Include="Views\TaskMaster\Index.cshtml" />
     <Content Include="Views\Employees\JobsIndex.cshtml" />
     <Content Include="Views\TaskMaster\Edit.cshtml" />
-    <Content Include="Views\Jobs\SeeProfits90Days.cshtml" />
+    <Content Include="Views\Jobs\SeeProfitsByMonths.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Shared\_LayoutContractor.cshtml" />
-    <Content Include="Views\Jobs\SeeProfits6Months.cshtml" />
-    <Content Include="Views\Jobs\SeeProfitsOneYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
