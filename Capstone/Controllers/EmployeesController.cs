@@ -189,11 +189,10 @@ namespace Capstone.Controllers
         //}
         public async System.Threading.Tasks.Task<ActionResult> CheckIn(int id)
         {
-            DateTime todaysDate = new DateTime();
+            DateTime todaysDate = DateTime.Now;
             string employeeLoggedIn = User.Identity.GetUserId();
             Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
             Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-
             Day today = new Day();
             today.EmployeeId = employeeToCheckIn.EmployeeId;
             today.TodaysDate = todaysDate.Date.ToString();
@@ -206,16 +205,17 @@ namespace Capstone.Controllers
         }
         public async System.Threading.Tasks.Task<ActionResult> CheckOut(int id)
         {
-            DateTime todaysDate = new DateTime();
+            DateTime todaysDate = DateTime.Now;
             string employeeLoggedIn = User.Identity.GetUserId();
-            Employee employeeToCheckIn = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
+            Employee employeeToCheckOut = db.Employees.Where(e => e.ApplicationId == employeeLoggedIn).SingleOrDefault();
             Job job = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-
-            Day today = new Day();
-            today.EmployeeId = employeeToCheckIn.EmployeeId;
+            Day today = db.Days.Where(d => d.CheckedIn == true).Where(d => d.EmployeeId == employeeToCheckOut.EmployeeId).SingleOrDefault();
             today.CheckedIn = false;
             today.TimeOut = todaysDate.TimeOfDay.ToString();
-            db.Days.Add(today);
+            DateTime timeIn = DateTime.Parse(today.TimeIn);
+            DateTime timeOut = DateTime.Parse(today.TimeOut);
+            double minutes = (timeOut.Subtract(timeIn).TotalMinutes);
+            today.MinutesWorked = minutes;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
