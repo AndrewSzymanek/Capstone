@@ -23,12 +23,11 @@ namespace Capstone.Controllers
             {
                 return RedirectToAction("Index", "Contractors");
             }
-            else 
+            else if (User.IsInRole(null))
             {
                 return View();
             }
-
- 
+            return View();
         }
 
         public ActionResult About()

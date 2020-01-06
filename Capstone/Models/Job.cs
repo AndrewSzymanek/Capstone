@@ -51,7 +51,7 @@ namespace Capstone.Models
         public bool? IsComplete { get; set; }
 
         [DisplayName("Date completed")]
-        public DateTime DateCompleted { get; set; }
+        public DateTime? DateCompleted { get; set; }
 
         [DisplayName("Profitability Ratio")]
         public double? ProfitabilityRatio { get; set; }

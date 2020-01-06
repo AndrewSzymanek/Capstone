@@ -9,7 +9,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(model => model.JobId)
     <div class="form-horizontal">
         <h4>Job</h4>
         <hr />

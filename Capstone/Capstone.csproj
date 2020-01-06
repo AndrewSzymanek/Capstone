@@ -260,6 +260,10 @@
     <Compile Include="Migrations\202001061427453_updateDay.Designer.cs">
       <DependentUpon>202001061427453_updateDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001061618206_madeDateCompletenullable.cs" />
+    <Compile Include="Migrations\202001061618206_madeDateCompletenullable.Designer.cs">
+      <DependentUpon>202001061618206_madeDateCompletenullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -371,9 +375,11 @@
     <Content Include="Views\TaskMaster\Index.cshtml" />
     <Content Include="Views\Employees\JobsIndex.cshtml" />
     <Content Include="Views\TaskMaster\Edit.cshtml" />
-    <Content Include="Views\Jobs\SeeProfitChart.cshtml" />
+    <Content Include="Views\Jobs\SeeProfits90Days.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Shared\_LayoutContractor.cshtml" />
+    <Content Include="Views\Jobs\SeeProfits6Months.cshtml" />
+    <Content Include="Views\Jobs\SeeProfitsOneYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001061427453_updateDay.resx">
       <DependentUpon>202001061427453_updateDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001061618206_madeDateCompletenullable.resx">
+      <DependentUpon>202001061618206_madeDateCompletenullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

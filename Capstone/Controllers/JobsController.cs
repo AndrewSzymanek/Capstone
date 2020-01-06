@@ -94,8 +94,6 @@ namespace Capstone.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Job job, Client client)
         {
-            try
-            {
                 Transaction transactionToAdd = new Transaction();
                 string contractorId = User.Identity.GetUserId();
                 Contractor contractorForTransaction = db.Contractors.Where(c => c.ApplicationId == contractorId).FirstOrDefault();
@@ -103,16 +101,13 @@ namespace Capstone.Controllers
                 transactionToAdd.ContractorId = contractorIdForTransaction;
                 transactionToAdd.ClientId = client.ClientId;
                 await GetLatLong(job);
+                job.DateCompleted = null;
                 db.Jobs.Add(job);
                 transactionToAdd.JobId = job.JobId;
                 db.Transactions.Add(transactionToAdd);           
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+  
         }
         public async System.Threading.Tasks.Task GetLatLong(Job job)
         {
@@ -155,7 +150,7 @@ namespace Capstone.Controllers
                 }             
                 db.Entry(job).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", "Jobs", job.JobId);
+                return RedirectToAction("Index", "Jobs");
             }
             return RedirectToAction("Index", "Jobs");
         }
@@ -208,11 +203,47 @@ namespace Capstone.Controllers
             int temperatureInFahrenheit = Convert.ToInt32(temperatureWithDecimal);
             return temperatureInFahrenheit;
         }
-        public ActionResult SeeProfitChart()
+        public async Task<List<Job>> GetCompleteJobs()
         {
-            List<Job> completeJobs = new List<Job>();
-            completeJobs = db.Jobs.Where(j => j.IsComplete == true && j.ProfitabilityRatio != null).ToList();
-            return View(completeJobs);
+            string contractorUserId = User.Identity.GetUserId();
+            Contractor contractorLoggedIn = db.Contractors.Where(c => c.ApplicationId == contractorUserId).SingleOrDefault();
+            List<Transaction> transactionsToJobs = db.Transactions.Where(t => t.ContractorId == contractorLoggedIn.ContractorId).ToList();
+            List<int> jobIds = new List<int>();
+            foreach (Transaction transaction in transactionsToJobs)
+            {
+                jobIds.Add(transaction.JobId);
+            }
+            List<Job> contractorsJobs = new List<Job>();
+            foreach (int jobId in jobIds)
+            {
+                Job contractorJob = db.Jobs.Where(j => j.JobId == jobId).FirstOrDefault();
+                contractorsJobs.Add(contractorJob);
+            }
+            List<Job> completeJobs = contractorsJobs.Where(j => j.IsComplete == true && j.ProfitabilityRatio != null).ToList();
+            return completeJobs;
         }
+        public async Task<ActionResult> SeeProfits90Days()
+        {
+            DateTime now = DateTime.Now;
+            List<Job> jobs = await GetCompleteJobs();           
+            List<Job> jobsWithin90Days = jobs.Where(j => j.DateCompleted?.Day <= (now.Day - 90)).ToList();
+            return View(jobsWithin90Days);
+        }
+
+        public async Task<ActionResult> SeeProfits6Months()
+        {
+            DateTime now = DateTime.Now;
+            List<Job> jobs = await GetCompleteJobs();
+            List<Job> jobsWithin6Months = jobs.Where(j => j.DateCompleted?.Day <= (now.Day - 180)).ToList();
+            return View(jobsWithin6Months);
+        }
+        public async Task<ActionResult> SeeProfitsOneYear()
+        {
+            DateTime now = DateTime.Now;
+            List<Job> jobs = await GetCompleteJobs();
+            List<Job> jobsWithinOneYear = jobs.Where(j => j.DateCompleted?.Day <= (now.Day - 365)).ToList();
+            return View(jobsWithinOneYear);
+        }
+
     }
 }
