@@ -256,6 +256,10 @@
     <Compile Include="Migrations\202001051620217_addedCheckedInToDay.Designer.cs">
       <DependentUpon>202001051620217_addedCheckedInToDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001061427453_updateDay.cs" />
+    <Compile Include="Migrations\202001061427453_updateDay.Designer.cs">
+      <DependentUpon>202001061427453_updateDay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChargeViewModel.cs" />
@@ -397,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001051620217_addedCheckedInToDay.resx">
       <DependentUpon>202001051620217_addedCheckedInToDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001061427453_updateDay.resx">
+      <DependentUpon>202001061427453_updateDay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

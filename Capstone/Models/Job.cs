@@ -50,8 +50,12 @@ namespace Capstone.Models
         [DisplayName("Complete?")]
         public bool? IsComplete { get; set; }
 
+        [DisplayName("Date completed")]
+        public DateTime DateCompleted { get; set; }
+
         [DisplayName("Profitability Ratio")]
         public double? ProfitabilityRatio { get; set; }
+     
 
         [NotMapped]
         public Weather Weather { get; set; }

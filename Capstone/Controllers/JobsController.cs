@@ -142,69 +142,44 @@ namespace Capstone.Controllers
 
         // POST: Jobs/Edit/5
         [HttpPost]
-        public ActionResult Edit(Job job)
+        public async Task<ActionResult> Edit(Job job)
         {
             if (ModelState.IsValid)
             {
+                if(job.MaterialsCost != null && job.LaborCost != null && job.IsComplete != false)
+                {
+                    job.TotalLiabilities = (job.MaterialsCost + job.LaborCost);
+                    job.ProfitabilityRatio = await CalculateProfitabilityRatio(job);
+                    DateTime completionDate = DateTime.Now;
+                    job.DateCompleted = completionDate;
+                }             
                 db.Entry(job).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Jobs");
+                return RedirectToAction("Details", "Jobs", job.JobId);
             }
-            return View();
+            return RedirectToAction("Index", "Jobs");
         }
 
         // GET: Jobs/Delete/5
         public ActionResult Delete(int id)
         {
-            
-            return View();
+            Job jobToDelete = db.Jobs.Where(j => j.JobId == id).FirstOrDefault();
+            return View(jobToDelete);
         }
 
         // POST: Jobs/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Job job)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        //public ActionResult AddMaterialsCost(int id)
-        //{
-        //    Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult AddMaterialsCost(Job job, double MaterialsCost)
-        //{
-        //    Job jobToAddMaterialsCost = db.Jobs.Where(j => j.JobId == job.JobId).SingleOrDefault();
-        //    jobToAddMaterialsCost.MaterialsCost += MaterialsCost;
-        //    db.SaveChanges();
-        //    return View("Index");
-        //}
-
-        public ActionResult CalculateProfitabilityRatio(int id)
-        {
-            //grab DateTime date when this is calculated?
-            Job jobToCalculateProfitRatio = db.Jobs.Where(j => j.JobId == id).SingleOrDefault();
-            if(jobToCalculateProfitRatio.MaterialsCost != null && jobToCalculateProfitRatio.LaborCost != null && jobToCalculateProfitRatio.IsComplete != false)
-            {
-                jobToCalculateProfitRatio.TotalLiabilities = (jobToCalculateProfitRatio.MaterialsCost + jobToCalculateProfitRatio.LaborCost);
-                jobToCalculateProfitRatio.ProfitabilityRatio = (jobToCalculateProfitRatio.PaymentReceived / jobToCalculateProfitRatio.TotalLiabilities);
-                db.Entry(jobToCalculateProfitRatio).State = EntityState.Modified;
+                db.Jobs.Remove(job);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }          
+        }
+
+        public async Task<double?> CalculateProfitabilityRatio(Job job)
+        {
+            job.ProfitabilityRatio  = (job.PaymentReceived / job.TotalLiabilities);
+            return job.ProfitabilityRatio;   
         }
 
         public async Task<string> GetWeatherCondition(Job job)
