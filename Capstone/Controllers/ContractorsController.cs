@@ -15,9 +15,7 @@ namespace Capstone.Controllers
         // GET: Contractors
         public ActionResult Index()
         {
-            //string contractorId = User.Identity.GetUserId();
-            //Contractor contractorToGet = db.Contractors.Where(c => c.ApplicationId == contractorId).SingleOrDefault();
-            return View(/*contractorToGet*/);
+            return View();
         }
 
         // GET: Contractors/Details/5
@@ -87,7 +85,8 @@ namespace Capstone.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                db.Contractors.Remove(contractor);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

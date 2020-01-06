@@ -95,22 +95,20 @@ namespace Capstone.Controllers
         // GET: Employees/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Employee employeeToDelete = db.Employees.Where(e => e.EmployeeId == id).FirstOrDefault();
+            return View(employeeToDelete);
         }
 
         // POST: Employees/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Employee employee)
+        public ActionResult Delete(Employee employee)
         {
-            try
-            {
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Employees.Remove(employee);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
+               //                   Below are methods to utilize Google Geolocation API when the app is hosted
+
         //[HttpPost]
         //public async Task<string> GetLat(Employee employee)
         //{

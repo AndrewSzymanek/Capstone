@@ -1,6 +1,7 @@
 ﻿using Capstone.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,14 +28,12 @@ namespace Capstone.Controllers
         // GET: Clients/Details/5
         public ActionResult Details(Client client)
         {
-            //Client thisClient = db.Clients.Where(c => c.ClientId == client.ClientId).SingleOrDefault();
             return View(client);
         }
 
         // GET: Clients/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
@@ -44,7 +43,6 @@ namespace Capstone.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 db.Clients.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Jobs", client);
@@ -58,39 +56,38 @@ namespace Capstone.Controllers
         // GET: Clients/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Client clientToEdit = db.Clients.Where(c => c.ClientId == id).FirstOrDefault();
+            return View(clientToEdit);
         }
 
         // POST: Clients/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Client client)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(client).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Clients/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Client clientToDelete = db.Clients.Where(c => c.ClientId == id).FirstOrDefault();
+            return View(clientToDelete);
         }
 
         // POST: Clients/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Client client)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                db.Clients.Remove(client);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

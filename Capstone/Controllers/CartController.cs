@@ -30,7 +30,7 @@ namespace Capstone.Controllers
             var options = new ChargeCreateOptions
             {
                 Amount = 999,
-                //could change amount to the charge on a job object, etc!
+                //change amount to the charge on a job object, etc!
                 Currency = "usd",
                 Description = "Example charge",
                 Source = token,
@@ -40,7 +40,7 @@ namespace Capstone.Controllers
 
             var model = new ChargeViewModel();
             model.ChargeId = charge.Id;
-            //could store this charge id on a transaction table?
+            //could store this charge id on an invoice table for later reference and refunds
 
             return View("OrderStatus", model);
         }

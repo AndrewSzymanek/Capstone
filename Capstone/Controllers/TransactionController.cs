@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,7 +51,8 @@ namespace Capstone.Controllers
         // GET: Transaction/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Transaction transactionToView = db.Transactions.Where(t => t.TransactionId == id).FirstOrDefault();
+            return View(transactionToView);
         }
 
         // GET: Transaction/Create
@@ -63,60 +65,45 @@ namespace Capstone.Controllers
         [HttpPost]
         public ActionResult Create(Transaction transaction)
         {
-            try
-            {
-                //string contractorId = User.Identity.GetUserId();
-                //Contractor contractor = db.Contractors.Where(c => c.ApplicationId == contractorId).FirstOrDefault();
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Transactions.Add(transaction);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Transaction/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Transaction transactionToEdit = db.Transactions.Where(t => t.TransactionId == id).FirstOrDefault();
+            return View(transactionToEdit);
         }
 
         // POST: Transaction/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Transaction transaction)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(transaction).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Transaction/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Transaction transactionToDelete = db.Transactions.Where(t => t.TransactionId == id).FirstOrDefault();
+            return View(transactionToDelete);
         }
 
         // POST: Transaction/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Transaction transaction)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Transactions.Remove(transaction);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

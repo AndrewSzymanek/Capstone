@@ -22,7 +22,8 @@ namespace Capstone.Controllers
         // GET: Tasks/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Task taskToView = db.Tasks.Where(t => t.TaskId == id).FirstOrDefault();
+            return View(taskToView);
         }
 
         // GET: Tasks/Create
@@ -66,23 +67,17 @@ namespace Capstone.Controllers
         // GET: Tasks/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Task taskToDelete = db.Tasks.Where(t => t.TaskId == id).FirstOrDefault();
+            return View(taskToDelete);
         }
 
         // POST: Tasks/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Task task)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Tasks.Remove(task);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
