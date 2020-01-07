@@ -2,28 +2,31 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutContractor.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Home</h2>
 
 <div>
     <h4>Contractor</h4>
     <hr />
 </div>
 
-<h6>Business Actions </h6>
-<ul>
-    <li>@Html.ActionLink("Jobs List", "Index", "Jobs")</li>
-    <li>@Html.ActionLink("New Project", "Create", "Clients")</li>
-    <li>@Html.ActionLink("Send Invoice", "Send", "Email")</li>
-    <li>@Html.ActionLink("Profit Ratios Last 90 Days", "SeeProfitsByMonths", "Jobs", new { months = 3}, null)</li>
-    <li>@Html.ActionLink("Profit Ratios Last 6 Months", "SeeProfitsByMonths", "Jobs",new { months = 6}, null)</li>
-    <li>@Html.ActionLink("Profit Ratios For Past Year To Date", "SeeProfitsByMonths", "Jobs", new { months = 12}, null)</li>
-</ul>
-<h6>Profile Actions</h6>
-<ul>
-    <li>@Html.ActionLink("Profile Info", "Details", "Contractors")</li>
-</ul>
+
+    <h6>Business Actions </h6>
+    <ul>
+        <li>@Html.ActionLink("Jobs List", "Index", "Jobs")</li>
+        <li>@Html.ActionLink("New Project", "Create", "Clients")</li>
+        <li>@Html.ActionLink("Send Invoice", "Send", "Email")</li>
+        <li>@Html.ActionLink("Profit Ratios Last 90 Days", "SeeProfitsByMonths", "Jobs", new { months = 3 }, null)</li>
+        <li>@Html.ActionLink("Profit Ratios Last 6 Months", "SeeProfitsByMonths", "Jobs", new { months = 6 }, null)</li>
+        <li>@Html.ActionLink("Profit Ratios For Past Year To Date", "SeeProfitsByMonths", "Jobs", new { months = 12 }, null)</li>
+    </ul>
+
+    <h6>Profile Actions</h6>
+    <ul>
+        <li>@Html.ActionLink("Profile Info", "Details", "Contractors")</li>
+    </ul>
+
 
 

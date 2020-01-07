@@ -298,6 +298,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\blueprints.jpeg" />
+    <Content Include="Images\sparks.jpeg" />
+    <Content Include="Images\workers.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\Settings.settings">
@@ -379,6 +382,7 @@
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Shared\_LayoutContractor.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Jobs\EmployeeJobDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

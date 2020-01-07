@@ -82,7 +82,18 @@ namespace Capstone.Controllers
             
             return View(jobToView);
         }
-   
+
+        public async Task<ActionResult> EmployeeJobDetails(int id)
+        {
+
+            Job jobToView = db.Jobs.Where(j => j.JobId == id).FirstOrDefault();
+            jobToView.Weather = new Models.Weather();
+            jobToView.Weather.Condition = await GetWeatherCondition(jobToView);
+            jobToView.Weather.Temperature = await GetTemperature(jobToView);
+
+            return View(jobToView);
+        }
+
 
         // GET: Jobs/Create
         public ActionResult Create(Client client)

@@ -107,10 +107,11 @@ namespace Capstone.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-               //                   Below are methods to utilize Google Geolocation API when the app is hosted
+
+        //                   Below are methods to utilize Google Geolocation API when the app is hosted
 
         //[HttpPost]
-        //public async Task<string> GetLat(Employee employee)
+        //public async Task<string> GetLatLong(Employee employee)
         //{
         //    var key = URLVariables.GeolocationKey;
         //    string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
@@ -121,27 +122,10 @@ namespace Capstone.Controllers
         //    {
         //        Geolocation latInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
         //        int Latitude = Convert.ToInt32(latInfo.lat);
+        //        int Longitude = Convert.ToInt32(latInfo.lng);
         //        employee.Geolocation.Lat = Latitude.ToString();
-        //        return employee.Geolocation.Lat;
-        //    }
-        //    string error = "Try again";
-        //    return error;
-        //}
-
-        //[HttpPost]
-        //public async Task<string> GetLong(Employee employee)
-        //{
-        //    var key = URLVariables.GeolocationKey;
-        //    string url = $"https://www.googleapis.com/geolocation/v1/geolocate?key={key}";
-        //    HttpClient client = new HttpClient();
-        //    HttpResponseMessage response = await client.GetAsync(url);
-        //    string jsonresult = await response.Content.ReadAsStringAsync();
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        Geolocation lngInfo = JsonConvert.DeserializeObject<Geolocation>(jsonresult);
-        //        int Longitude = Convert.ToInt32(lngInfo.lng);
         //        employee.Geolocation.Lng = Longitude.ToString();
-        //        return employee.Geolocation.Lng;
+        //        return employee.Geolocation.Lat;
         //    }
         //    string error = "Try again";
         //    return error;
@@ -149,8 +133,7 @@ namespace Capstone.Controllers
 
         //public async System.Threading.Tasks.Task CompareToJobLocation(Job job, Employee employee)
         //{         
-        //    await GetLat(employee);
-        //    await GetLong(employee);
+        //    await GetLatLong(employee);
 
         //}
         //public async System.Threading.Tasks.Task CheckIn(int id)

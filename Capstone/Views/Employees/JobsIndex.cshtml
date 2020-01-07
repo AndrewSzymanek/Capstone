@@ -26,7 +26,7 @@
         </td>
   
         <td>
-            @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }, null) |
+            @Html.ActionLink("Details", "EmployeeJobDetails", "Jobs", new { id = item.JobId }, null) |
             @Html.ActionLink("View task list", "Index", "TaskMaster", new { id = item.JobId }, null) |
             @Html.ActionLink("Check In", "CheckIn", "Employees",new { id = item.JobId }, null) |
             @Html.ActionLink("Check Out", "CheckOut", "Employees",new { id = item.JobId }, null)

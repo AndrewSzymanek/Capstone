@@ -59,7 +59,7 @@ namespace Capstone.Controllers
                 {
                     db.Entry(task).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("JobsIndex", "Employees");
+                    return RedirectToAction("Index", "Home");
                 }
                 return RedirectToAction("Index", "Home");          
         }
