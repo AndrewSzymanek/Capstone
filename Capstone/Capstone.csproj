@@ -378,6 +378,7 @@
     <Content Include="Views\Jobs\SeeProfitsByMonths.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Shared\_LayoutContractor.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

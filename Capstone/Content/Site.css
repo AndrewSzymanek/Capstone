@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,12 +11,19 @@
     padding-right: 15px;
 }
 .navbar {
-    background-color: #1D252D;
-    
+    background-color: #0a0840;
+}
+.navbar-brand {
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
 }
 
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
-    color: orange;
+    color: white;
+}
+.jumbotron {
+    background-color: #c7c6c5;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 

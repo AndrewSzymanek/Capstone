@@ -26,10 +26,17 @@
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessName)
+        </dd>
 
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ContractorId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Contractor Portal", "Index")
 </p>

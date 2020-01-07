@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,7 +16,21 @@ namespace Capstone.Controllers
         
         public ActionResult Index()
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            Contractor contractor = db.Contractors.Where(c => c.ApplicationId == userId).FirstOrDefault();
+            List<Transaction> contractorsTransactions = db.Transactions.Where(t => t.ContractorId == contractor.ContractorId).ToList();
+            List<int> clientIds = new List<int>();
+            foreach(Transaction transaction in contractorsTransactions)
+            {
+                clientIds.Add(transaction.ClientId);
+            }
+            List<Client> clients = new List<Client>();
+            foreach(int ClientId in clientIds)
+            {
+                Client client = db.Clients.Find(ClientId);
+                clients.Add(client);
+            }
+            return View(clients);
         }
 
         public ActionResult GetClientInfo(int id)
