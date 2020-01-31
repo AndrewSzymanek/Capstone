@@ -40,6 +40,7 @@ namespace Capstone.Controllers
 
             var model = new ChargeViewModel();
             model.ChargeId = charge.Id;
+            
             //could store this charge id on an invoice table for later reference and refunds
 
             return View("OrderStatus", model);
