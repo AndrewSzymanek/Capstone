@@ -38,7 +38,7 @@ namespace Capstone.Models
         [DisplayName("Total Labor Cost")]
         public double? LaborCost { get; set; }
 
-        [DisplayName("Total Liabilities (labor + materials")]
+        [DisplayName("Total Liabilities (labor + materials)")]
         public double? TotalLiabilities { get; set; }
 
         [DisplayName("Payment Received")]

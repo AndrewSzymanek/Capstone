@@ -158,7 +158,8 @@ namespace Capstone.Controllers
                     job.ProfitabilityRatio = await CalculateProfitabilityRatio(job);
                     DateTime completionDate = DateTime.Now;
                     job.DateCompleted = completionDate;
-                }             
+                }
+                await GetLatLong(job);
                 db.Entry(job).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Jobs");
