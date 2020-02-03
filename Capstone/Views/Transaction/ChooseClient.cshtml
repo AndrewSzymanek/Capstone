@@ -2,28 +2,56 @@
 @{
     ViewBag.Title = "ChooseClient";
 }
-
 <h2>Choose Client</h2>
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Client</h4>
+        <div class="form-group">
+            @Html.LabelFor(model => model, "Client Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Client", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-<div class="form-horizontal">
-    <h4>Client</h4>
-    <div class="form-group">
-        @Html.LabelFor(model => model, "Client Name", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Client", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Rate" class="btn btn-default" />
+            </div>
         </div>
     </div>
+    }*@
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Rate" class="btn btn-default" />
-        </div>
-    </div>
+            <th></th>
+        </tr>
 
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+
+        <td>
+            @Html.ActionLink("Create Job", "Create", "Jobs", new { @*id = item.ClientId*@ client = item}, null)
+        </td>
+    </tr>
+        }
+
+    </table>
 </div>
-}
