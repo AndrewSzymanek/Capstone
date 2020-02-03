@@ -96,21 +96,28 @@ namespace Capstone.Controllers
 
 
         // GET: Jobs/Create
-        public ActionResult Create(Client client)
+        public ActionResult Create()
         {
             return View();
         }
 
         // POST: Jobs/Create
         [HttpPost]
-        public async Task<ActionResult> Create(Job job, Client client)
+        public async Task<ActionResult> Create(Job job, Client client, int id)
         {
                 Transaction transactionToAdd = new Transaction();
                 string contractorId = User.Identity.GetUserId();
                 Contractor contractorForTransaction = db.Contractors.Where(c => c.ApplicationId == contractorId).FirstOrDefault();
                 int contractorIdForTransaction = contractorForTransaction.ContractorId;             
                 transactionToAdd.ContractorId = contractorIdForTransaction;
-                transactionToAdd.ClientId = client.ClientId;
+                if(client.ClientId == 0 && id != null)
+                {
+                    transactionToAdd.ClientId = id;
+                }
+                else if(client.ClientId != 0)
+                {
+                    transactionToAdd.ClientId = client.ClientId;
+                }                    
                 await GetLatLong(job);
                 job.DateCompleted = null;
                 db.Jobs.Add(job);
