@@ -1,14 +1,25 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 500;
+    background-image: url('../Images/blueprint background1 (2).jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 }
-
+footer{
+    bottom:0px;
+    
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+.textBackground {
+    height: 100vh;
 }
 .navbar {
     background-color: #0a0840;
@@ -45,7 +56,8 @@
     font-size: 16px;
 }
 #homeHr{
-    margin-top: 150px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 

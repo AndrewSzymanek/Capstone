@@ -4,15 +4,16 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="textBackground">
+        <h2>Home</h2>
+        <div>
+            <h4>Employee</h4>
+            <hr />
+        </div>
+        <ul>
+            <li>@Html.ActionLink("Profile Info", "Details", "Employees")</li>
+            <li>@Html.ActionLink("View Jobs", "JobsIndex", "Employees")</li>
+        </ul>
+    </div>
 
-<h2>Home</h2>
-
-<div>
-    <h4>Employee</h4>
-    <hr />
-</div>
-<ul>
-    <li>@Html.ActionLink("Profile Info", "Details", "Employees")</li>
-    <li>@Html.ActionLink("View Jobs", "JobsIndex", "Employees")</li>
-</ul>
 

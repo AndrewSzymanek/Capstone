@@ -298,6 +298,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\blueprint background1 %282%29.jpg" />
+    <Content Include="Images\blueprint background1.jpg" />
     <Content Include="Images\blueprints.jpeg" />
     <Content Include="Images\sparks.jpeg" />
     <Content Include="Images\workers.jpeg" />
